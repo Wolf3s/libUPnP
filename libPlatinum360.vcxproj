@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Xbox 360">
+      <Configuration>Debug</Configuration>
+      <Platform>Xbox 360</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Xbox 360">
+      <Configuration>Release</Configuration>
+      <Platform>Xbox 360</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>libPlatinum</ProjectName>
+    <ProjectGuid>{B2975495-FBE4-4F94-AAC5-B21A9842BF50}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Xbox 360'">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug_PC\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Debug_PC\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release_PC\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release_PC\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Xbox 360'">Release_X360</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Xbox 360'">Release_X360</IntDir>
+    <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Xbox 360'">$(OutDir)/libPlatinum.lib</OutputFile>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\Neptune\Source\Core;.\Platinum\Source\Core;.\Platinum\Source\Platinum;.\Platinum\Source\Platinum;.\Platinum\Source\Devices\MediaServer;.\Neptune\Source\System\Xbox;.\Neptune\Source\System\Win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;NPT_CONFIG_ENABLE_LOGGING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)libPlatinum_PCd.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\Neptune\Source\Core;.\Platinum\Source\Core;.\Platinum\Source\Platinum;.\Platinum\Source\Platinum;.\Platinum\Source\Devices\MediaServer;.\Neptune\Source\System\Xbox;.\Neptune\Source\System\Win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;NPT_CONFIG_ENABLE_LOGGING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)libPlatinum_PC.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Xbox 360'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.\Neptune\Source\Core;.\Platinum\Source\Core;.\Platinum\Source\Platinum;.\Platinum\Source\Platinum;.\Platinum\Source\Devices\MediaServer;.\Neptune\Source\System\Xbox;.\Neptune\Source\System\Win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>NPT_CONFIG_ENABLE_LOGGING;__XBOX_360__;_XBOX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Neptune\Source\System\Xbox\NptXboxNetwork.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Platinum\Source\Core\PltAction.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltArgument.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltConstants.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltCtrlPoint.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltCtrlPointTask.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltDatagramStream.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltDeviceData.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltDeviceHost.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltDownloader.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltEvent.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltHttp.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltHttpClientTask.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltHttpServer.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltHttpServerTask.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltIconsData.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltLeaks.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltMetadataHandler.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltService.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltSsdp.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltStateVariable.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltStreamPump.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltTaskManager.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltThreadTask.cpp" />
+    <ClCompile Include="Platinum\Source\Core\PltUPnP.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaServer\ConnectionManagerSCPD.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaServer\ContentDirectorywSearchSCPD.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaServer\PltDidl.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaServer\PltFileMediaServer.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaServer\PltMediaBrowser.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaServer\PltMediaCache.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaServer\PltMediaItem.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaServer\PltMediaServer.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaServer\PltSyncMediaBrowser.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaRenderer\AVTransportSCPD.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaRenderer\PltMediaController.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaRenderer\PltMediaRenderer.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaRenderer\RdrConnectionManagerSCPD.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaRenderer\RenderingControlSCPD.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaConnect\PltMediaConnect.cpp" />
+    <ClCompile Include="Platinum\Source\Devices\MediaConnect\X_MS_MediaReceiverRegistrarSCPD.cpp" />
+    <ClCompile Include="Neptune\Source\Core\Neptune.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptBase64.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptBufferedStreams.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptCommon.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptConsole.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptDataBuffer.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptDebug.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptDynamicLibraries.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptFile.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptHttp.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptList.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptLogging.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptMessaging.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptNetwork.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptQueue.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptResults.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptRingBuffer.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptSimpleMessageQueue.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptSockets.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptStreams.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptStrings.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptSystem.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptThreads.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptTime.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptTls.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptUri.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptUtils.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptXml.cpp" />
+    <ClCompile Include="Neptune\Source\Core\NptZip.cpp" />
+    <ClCompile Include="Neptune\Source\System\Bsd\NptBsdSockets.cpp" />
+    <ClCompile Include="Neptune\Source\System\Posix\NptPosixFile.cpp" />
+    <ClCompile Include="Neptune\Source\System\Win32\NptWin32Debug.cpp" />
+    <ClCompile Include="Neptune\Source\System\Win32\NptWin32File.cpp" />
+    <ClCompile Include="Neptune\Source\System\Win32\NptWin32Network.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Xbox 360'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Neptune\Source\System\Win32\NptWin32Queue.cpp" />
+    <ClCompile Include="Neptune\Source\System\Win32\NptWin32System.cpp" />
+    <ClCompile Include="Neptune\Source\System\Win32\NptWin32Threads.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Platinum\Source\Core\PltAction.h" />
+    <ClInclude Include="Platinum\Source\Core\PltArgument.h" />
+    <ClInclude Include="Platinum\Source\Core\PltConstants.h" />
+    <ClInclude Include="Platinum\Source\Core\PltCtrlPoint.h" />
+    <ClInclude Include="Platinum\Source\Core\PltCtrlPointTask.h" />
+    <ClInclude Include="Platinum\Source\Core\PltDatagramStream.h" />
+    <ClInclude Include="Platinum\Source\Core\PltDeviceData.h" />
+    <ClInclude Include="Platinum\Source\Core\PltDeviceHost.h" />
+    <ClInclude Include="Platinum\Source\Core\PltDownloader.h" />
+    <ClInclude Include="Platinum\Source\Core\PltEvent.h" />
+    <ClInclude Include="Platinum\Source\Core\PltHttp.h" />
+    <ClInclude Include="Platinum\Source\Core\PltHttpClientTask.h" />
+    <ClInclude Include="Platinum\Source\Core\PltHttpServer.h" />
+    <ClInclude Include="Platinum\Source\Core\PltHttpServerListener.h" />
+    <ClInclude Include="Platinum\Source\Core\PltHttpServerTask.h" />
+    <ClInclude Include="Platinum\Source\Core\PltLeaks.h" />
+    <ClInclude Include="Platinum\Source\Core\PltMetadataHandler.h" />
+    <ClInclude Include="Platinum\Source\Core\PltService.h" />
+    <ClInclude Include="Platinum\Source\Core\PltSsdp.h" />
+    <ClInclude Include="Platinum\Source\Core\PltSsdpListener.h" />
+    <ClInclude Include="Platinum\Source\Core\PltStateVariable.h" />
+    <ClInclude Include="Platinum\Source\Core\PltStreamPump.h" />
+    <ClInclude Include="Platinum\Source\Core\PltTaskManager.h" />
+    <ClInclude Include="Platinum\Source\Core\PltThreadTask.h" />
+    <ClInclude Include="Platinum\Source\Core\PltUPnP.h" />
+    <ClInclude Include="Platinum\Source\Core\PltUPnPHelper.h" />
+    <ClInclude Include="Platinum\Source\Core\PltVersion.h" />
+    <ClInclude Include="Platinum\Source\Core\PltXmlHelper.h" />
+    <ClInclude Include="Platinum\Source\Devices\MediaServer\PltDidl.h" />
+    <ClInclude Include="Platinum\Source\Devices\MediaServer\PltFileMediaServer.h" />
+    <ClInclude Include="Platinum\Source\Devices\MediaServer\PltMediaBrowser.h" />
+    <ClInclude Include="Platinum\Source\Devices\MediaServer\PltMediaBrowserListener.h" />
+    <ClInclude Include="Platinum\Source\Devices\MediaServer\PltMediaCache.h" />
+    <ClInclude Include="Platinum\Source\Devices\MediaServer\PltMediaItem.h" />
+    <ClInclude Include="Platinum\Source\Devices\MediaServer\PltMediaServer.h" />
+    <ClInclude Include="Platinum\Source\Devices\MediaServer\PltSyncMediaBrowser.h" />
+    <ClInclude Include="Platinum\Source\Devices\MediaRenderer\PltMediaController.h" />
+    <ClInclude Include="Platinum\Source\Devices\MediaRenderer\PltMediaControllerListener.h" />
+    <ClInclude Include="Platinum\Source\Devices\MediaRenderer\PltMediaRenderer.h" />
+    <ClInclude Include="Platinum\Source\Devices\MediaConnect\PltMediaConnect.h" />
+    <ClInclude Include="Platinum\Source\Platinum\Platinum.h" />
+    <ClInclude Include="Platinum\Source\Platinum\PltVersion.h" />
+    <ClInclude Include="Neptune\Source\Core\Neptune.h" />
+    <ClInclude Include="Neptune\Source\Core\NptArray.h" />
+    <ClInclude Include="Neptune\Source\Core\NptBase64.h" />
+    <ClInclude Include="Neptune\Source\Core\NptBufferedStreams.h" />
+    <ClInclude Include="Neptune\Source\Core\NptCommon.h" />
+    <ClInclude Include="Neptune\Source\Core\NptConfig.h" />
+    <ClInclude Include="Neptune\Source\Core\NptConsole.h" />
+    <ClInclude Include="Neptune\Source\Core\NptConstants.h" />
+    <ClInclude Include="Neptune\Source\Core\NptDataBuffer.h" />
+    <ClInclude Include="Neptune\Source\Core\NptDebug.h" />
+    <ClInclude Include="Neptune\Source\Core\NptDefs.h" />
+    <ClInclude Include="Neptune\Source\Core\NptDynamicCast.h" />
+    <ClInclude Include="Neptune\Source\Core\NptDynamicLibraries.h" />
+    <ClInclude Include="Neptune\Source\Core\NptFile.h" />
+    <ClInclude Include="Neptune\Source\Core\NptHttp.h" />
+    <ClInclude Include="Neptune\Source\Core\NptInterfaces.h" />
+    <ClInclude Include="Neptune\Source\Core\NptList.h" />
+    <ClInclude Include="Neptune\Source\Core\NptLogging.h" />
+    <ClInclude Include="Neptune\Source\Core\NptMap.h" />
+    <ClInclude Include="Neptune\Source\Core\NptMessaging.h" />
+    <ClInclude Include="Neptune\Source\Core\NptNetwork.h" />
+    <ClInclude Include="Neptune\Source\Core\NptQueue.h" />
+    <ClInclude Include="Neptune\Source\Core\NptReferences.h" />
+    <ClInclude Include="Neptune\Source\Core\NptResults.h" />
+    <ClInclude Include="Neptune\Source\Core\NptRingBuffer.h" />
+    <ClInclude Include="Neptune\Source\Core\NptSelectableMessageQueue.h" />
+    <ClInclude Include="Neptune\Source\Core\NptSerialPort.h" />
+    <ClInclude Include="Neptune\Source\Core\NptSimpleMessageQueue.h" />
+    <ClInclude Include="Neptune\Source\Core\NptSockets.h" />
+    <ClInclude Include="Neptune\Source\Core\NptStack.h" />
+    <ClInclude Include="Neptune\Source\Core\NptStreams.h" />
+    <ClInclude Include="Neptune\Source\Core\NptStrings.h" />
+    <ClInclude Include="Neptune\Source\Core\NptSystem.h" />
+    <ClInclude Include="Neptune\Source\Core\NptThreads.h" />
+    <ClInclude Include="Neptune\Source\Core\NptTime.h" />
+    <ClInclude Include="Neptune\Source\Core\NptTls.h" />
+    <ClInclude Include="Neptune\Source\Core\NptTypes.h" />
+    <ClInclude Include="Neptune\Source\Core\NptUri.h" />
+    <ClInclude Include="Neptune\Source\Core\NptUtils.h" />
+    <ClInclude Include="Neptune\Source\Core\NptVersion.h" />
+    <ClInclude Include="Neptune\Source\Core\NptXml.h" />
+    <ClInclude Include="Neptune\Source\Core\NptZip.h" />
+    <ClInclude Include="Neptune\Source\System\Win32\NptWin32Threads.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

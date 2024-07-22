@@ -14,8 +14,13 @@
 
 // Win32 includes
 #if !defined(__WIN32__) 
-#define __WIN32__
+#define __WIN32__ 1
 #endif
+
+#if !defined(__XBOX_360__)
+#define __XBOX_360__ 1
+#endif
+
 #endif
 #if defined(__WIN32__) && !defined(_XBOX)
 #define STRICT
@@ -115,7 +120,9 @@ const int NPT_TCP_SERVER_SOCKET_DEFAULT_LISTEN_COUNT = 20;
 #if defined(__WIN32__) || defined(_XBOX)
 #if defined(_XBOX)
 #include "NptXboxNetwork.h"
+#ifndef SO_ERROR
 #define SO_ERROR    0x1007          /* unsupported */
+#endif
 #else
 #include "NptWin32Network.h"
 #endif
@@ -1015,7 +1022,7 @@ NPT_BsdSocket::Bind(const NPT_SocketAddress& address, bool reuse_address)
     // on non windows, we need to set reuse address no matter what so
     // that we can bind on the same port when the socket has closed 
     // but is still in a timed-out mode
-#if !defined(__WIN32__) && !defined(_XBOX)
+#if !defined(__WIN32__) && !defined(_XBOX) || defined(__XBOX_360__)
     int option_ra = 1;
     setsockopt(m_SocketFdReference->m_SocketFd,
                SOL_SOCKET,
@@ -1491,7 +1498,7 @@ NPT_BsdUdpMulticastSocket::~NPT_BsdUdpMulticastSocket()
 {
 }
 
-#if defined(_XBOX)
+#if defined(_XBOX) && !defined(__XBOX_360__)
 /*----------------------------------------------------------------------
 |   NPT_BsdUdpMulticastSocket::JoinGroup
 +---------------------------------------------------------------------*/
@@ -1529,7 +1536,7 @@ NPT_BsdUdpMulticastSocket::JoinGroup(const NPT_IpAddress& group,
 }
 #endif
 
-#if defined(_XBOX)
+#if defined(_XBOX) && !defined(__XBOX_360__)
 /*----------------------------------------------------------------------
 |   NPT_BsdUdpMulticastSocket::LeaveGroup
 +---------------------------------------------------------------------*/
@@ -1804,7 +1811,7 @@ NPT_BsdTcpClientSocket::DoWaitForConnection(NPT_Timeout timeout)
     } else if (FD_ISSET(socket_fd, &read_set)   || 
                FD_ISSET(socket_fd, &write_set)  ||
                FD_ISSET(socket_fd, &except_set)) {
-#if defined(_XBOX)
+#if defined(_XBOX) && !defined(__XBOX_360__)
         if (FD_ISSET(socket_fd, &except_set)) return MapErrorCode(GetSocketError());
 #else
         // get error status from socket

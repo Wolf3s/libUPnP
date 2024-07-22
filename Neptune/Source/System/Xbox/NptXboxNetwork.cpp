@@ -26,12 +26,18 @@ NPT_WinsockSystem::NPT_WinsockSystem() {
     xnsp.cfgFlags = XNET_STARTUP_BYPASS_SECURITY;
 
     // create more memory for networking
+#ifdef __XBOX_360__
+	xnsp.cfgKeyRegMax = 8; // default = 
+	xnsp.cfgSockMaxStreamSockets = 32; // default = 32
+	xnsp.cfgSockMaxDgramSockets = 8; // default = 8
+#else
     xnsp.cfgPrivatePoolSizeInPages = 64; // == 256kb, default = 12 (48kb)
     xnsp.cfgEnetReceiveQueueLength = 16; // == 32kb, default = 8 (16kb)
     xnsp.cfgIpFragMaxSimultaneous = 16; // default = 4
     xnsp.cfgIpFragMaxPacketDiv256 = 32; // == 8kb, default = 8 (2kb)
     xnsp.cfgSockMaxSockets = 64; // default = 64
-    xnsp.cfgSockDefaultRecvBufsizeInK = 128; // default = 16
+#endif
+	xnsp.cfgSockDefaultRecvBufsizeInK = 128; // default = 16
     xnsp.cfgSockDefaultSendBufsizeInK = 128; // default = 16
 
     INT err = XNetStartup(&xnsp);
