@@ -114,7 +114,7 @@ protected:
                           NPT_Int32                count,
                           bool                     browse_metadata = false,
 #ifdef XBMC
-						const char*              filter = "*", 
+                          const char*              filter = "*", 
 #else
                           const char*              filter = "dc:date,upnp:genre,res@duration,res@size,upnp:albumArtURI,upnp:album,upnp:artist,upnp:author", 
 #endif

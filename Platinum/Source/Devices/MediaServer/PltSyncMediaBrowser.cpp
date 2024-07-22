@@ -243,15 +243,14 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
 #ifdef XBMC
     NPT_UInt32 count = 0;
     bool       cache = m_UseCache && !metadata && start == 0 && max_results == 0;
-
 #endif
     // reset output params
     list = NULL;
-#ifdef XBMC
+
     // look into cache first
+#ifdef XBMC
     if (cache && NPT_SUCCEEDED(m_Cache.Get(device->GetUUID(), object_id, list))) return NPT_SUCCESS;
 #else
-    // look into cache first
     if (m_UseCache && NPT_SUCCEEDED(m_Cache.Get(device->GetUUID(), object_id, list))) return NPT_SUCCESS;
 #endif
     do {	
@@ -273,19 +272,19 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
             res = browse_data->res;
             NPT_CHECK_LABEL_WARNING(res, done);
         }
+
 #ifdef XBMC
-		if (browse_data->info.nr == 0)
+        if (browse_data->info.nr == 0)
 #else
         if (browse_data->info.items->GetItemCount() == 0)
 #endif
             break;
-
+			
 #ifdef XBMC
         if (browse_data->info.nr != browse_data->info.items->GetItemCount()) {
             NPT_LOG_WARNING_2("Server unexpected number of items (%d vs %d)", browse_data->info.items->GetItemCount(), browse_data->info.nr);
         }
         count += std::max<NPT_UInt32>(browse_data->info.nr, browse_data->info.items->GetItemCount());
-
 #endif
 
         if (list.IsNull()) {
@@ -304,17 +303,30 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
         // nothing is returned back by the server.
         // Unless we were told to stop after reaching a certain amount to avoid
         // length delays
+#ifdef XBMC
+        if ((browse_data->info.tm && browse_data->info.tm <= count) ||
+            (max_results && count >= max_results))
+#else
         if ((browse_data->info.tm && browse_data->info.tm == list->GetItemCount()) ||
             (max_results && list->GetItemCount() >= max_results))
+#endif
             break;
 
         // ask for the next chunk of entries
-        index = list->GetItemCount();
-    } while(1);
+#ifdef XBMC
+		index = count;
+#else        
+		index = list->GetItemCount();
+#endif
+	} while(1);
 
 done:
     // cache the result
+#ifdef XBMC
+    if (cache && NPT_SUCCEEDED(res) && !list.IsNull() && list->GetItemCount()) {
+#else
     if (m_UseCache && NPT_SUCCEEDED(res) && !list.IsNull() && list->GetItemCount()) {
+#endif
         m_Cache.Put(device->GetUUID(), object_id, list);
     }
 
