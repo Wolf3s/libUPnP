@@ -2,7 +2,7 @@
 |
 |   Platinum - Synchronous Media Browser
 |
-| Copyright (c) 2004-2008, Plutinosoft, LLC.
+| Copyright (c) 2004-2010, Plutinosoft, LLC.
 | All rights reserved.
 | http://www.plutinosoft.com
 |
@@ -17,7 +17,8 @@
 | licensed software under version 2, or (at your option) any later
 | version, of the GNU General Public License (the "GPL") must enter
 | into a commercial license agreement with Plutinosoft, LLC.
-| 
+| licensing@plutinosoft.com
+|  
 | This program is distributed in the hope that it will be useful,
 | but WITHOUT ANY WARRANTY; without even the implied warranty of
 | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -210,6 +211,7 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_BrowseDataReference& browse_data,
     NPT_Result res;
 
     browse_data->shared_var.SetValue(0);
+    browse_data->info.si = index;
 
     // send off the browse packet.  Note that this will
     // not block.  There is a call to WaitForResponse in order
@@ -241,20 +243,20 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
     NPT_Result res = NPT_FAILURE;
     NPT_Int32  index = start;
 #ifdef XBMC
-    NPT_UInt32 count = 0;
-    bool       cache = m_UseCache && !metadata && start == 0 && max_results == 0;
+	NPT_UInt32 count = 0;
 #endif
+    
+    // only cache metadata or if starting from 0 and asking for maximum
+    bool cache = m_UseCache && (metadata || (start == 0 && max_results == 0));
+
     // reset output params
     list = NULL;
 
     // look into cache first
-#ifdef XBMC
     if (cache && NPT_SUCCEEDED(m_Cache.Get(device->GetUUID(), object_id, list))) return NPT_SUCCESS;
-#else
-    if (m_UseCache && NPT_SUCCEEDED(m_Cache.Get(device->GetUUID(), object_id, list))) return NPT_SUCCESS;
-#endif
+
     do {	
-        PLT_BrowseDataReference browse_data(new PLT_BrowseData());
+        PLT_BrowseDataReference browse_data(new PLT_BrowseData(), true);
 
         // send off the browse packet.  Note that this will
         // not block.  There is a call to WaitForResponse in order
@@ -273,13 +275,14 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
             NPT_CHECK_LABEL_WARNING(res, done);
         }
 
+        // server returned no more, bail now
 #ifdef XBMC
         if (browse_data->info.nr == 0)
 #else
         if (browse_data->info.items->GetItemCount() == 0)
 #endif
             break;
-			
+
 #ifdef XBMC
         if (browse_data->info.nr != browse_data->info.items->GetItemCount()) {
             NPT_LOG_WARNING_2("Server unexpected number of items (%d vs %d)", browse_data->info.items->GetItemCount(), browse_data->info.nr);
@@ -303,6 +306,7 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
         // nothing is returned back by the server.
         // Unless we were told to stop after reaching a certain amount to avoid
         // length delays
+        // (some servers may return a total matches out of whack at some point too)
 #ifdef XBMC
         if ((browse_data->info.tm && browse_data->info.tm <= count) ||
             (max_results && count >= max_results))
@@ -313,25 +317,17 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
             break;
 
         // ask for the next chunk of entries
-#ifdef XBMC
-		index = count;
-#else        
-		index = list->GetItemCount();
-#endif
-	} while(1);
+        index = list->GetItemCount();
+    } while(1);
 
 done:
     // cache the result
-#ifdef XBMC
     if (cache && NPT_SUCCEEDED(res) && !list.IsNull() && list->GetItemCount()) {
-#else
-    if (m_UseCache && NPT_SUCCEEDED(res) && !list.IsNull() && list->GetItemCount()) {
-#endif
         m_Cache.Put(device->GetUUID(), object_id, list);
     }
 
     // clear entire cache data for device if failed, the device could be gone
-    if (NPT_FAILED(res) && m_UseCache) m_Cache.Clear(device->GetUUID());
+    if (NPT_FAILED(res) && cache) m_Cache.Clear(device->GetUUID());
     
     return res;
 }

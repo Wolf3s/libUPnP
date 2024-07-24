@@ -21,8 +21,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				OptimizeForProcessor="2"
-				AdditionalIncludeDirectories=".\Neptune\Source\Core;.\Platinum\Source\Core;.\Platinum\Source\Platinum;.\Platinum\Source\Platinum;.\Platinum\Source\Devices\MediaServer;.\Neptune\Source\System\Xbox;.\Neptune\Source\System\Win32"
-				PreprocessorDefinitions="_DEBUG;_XBOX;_LIB;NPT_CONFIG_ENABLE_LOGGING"
+				AdditionalIncludeDirectories=".\Neptune\Source\Core;.\Platinum\Source\Core;.\Platinum\Source\Platinum;.\Platinum\Source\Devices\MediaConnect;.\Platinum\Source\Devices\MediaServer;.\Platinum\Source\Devices\MediaRenderer;.\Platinum\Source\Extras;.\Neptune\Source\System\Xbox;.\Neptune\Source\System\Win32"
+				PreprocessorDefinitions="_DEBUG;_XBOX;_LIB;NPT_CONFIG_ENABLE_LOGGING;XBMC"
 				MinimalRebuild="FALSE"
 				ExceptionHandling="FALSE"
 				BasicRuntimeChecks="3"
@@ -163,8 +163,8 @@ copy Release\libPlatinum.lib ..\..\xbmc\lib\libUPnP
 				FavorSizeOrSpeed="2"
 				OmitFramePointers="TRUE"
 				OptimizeForProcessor="2"
-				AdditionalIncludeDirectories=".\Neptune\Source\Core;.\Platinum\Source\Core;.\Platinum\Source\Platinum;.\Platinum\Source\Devices\MediaServer;.\Neptune\Source\System\Xbox;.\Neptune\Source\System\Win32"
-				PreprocessorDefinitions="NDEBUG;_XBOX;_LIB;NPT_CONFIG_ENABLE_LOGGING"
+				AdditionalIncludeDirectories=".\Neptune\Source\Core;.\Platinum\Source\Devices\FrameStreamer;.\Platinum\Source\Core;.\Platinum\Source\Platinum;.\Platinum\Source\Devices\MediaServer;.\Platinum\Source\Devices\MediaRenderer\;.\Platinum\Source\Extras\;.\Neptune\Source\System\Xbox;.\Neptune\Source\System\Win32"
+				PreprocessorDefinitions="NDEBUG;_XBOX;_LIB;NPT_CONFIG_ENABLE_LOGGING;__WINSOCK__"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="TRUE"
 				EnableEnhancedInstructionSet="1"
@@ -282,12 +282,6 @@ copy Release\libPlatinum.lib ..\..\xbmc\lib\libUPnP
 					RelativePath=".\Platinum\Source\Core\PltDeviceHost.h">
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Core\PltDownloader.cpp">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Core\PltDownloader.h">
-				</File>
-				<File
 					RelativePath=".\Platinum\Source\Core\PltEvent.cpp">
 				</File>
 				<File
@@ -324,16 +318,16 @@ copy Release\libPlatinum.lib ..\..\xbmc\lib\libUPnP
 					RelativePath=".\Platinum\Source\Core\PltIconsData.cpp">
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Core\PltLeaks.cpp">
+					RelativePath=".\Platinum\Source\Core\PltMimeType.cpp">
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Core\PltLeaks.h">
+					RelativePath=".\Platinum\Source\Core\PltMimeType.h">
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Core\PltMetadataHandler.cpp">
+					RelativePath=".\Platinum\Source\Core\PltProtocolInfo.cpp">
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Core\PltMetadataHandler.h">
+					RelativePath=".\Platinum\Source\Core\PltProtocolInfo.h">
 				</File>
 				<File
 					RelativePath=".\Platinum\Source\Core\PltService.cpp">
@@ -357,12 +351,6 @@ copy Release\libPlatinum.lib ..\..\xbmc\lib\libUPnP
 					RelativePath=".\Platinum\Source\Core\PltStateVariable.h">
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Core\PltStreamPump.cpp">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Core\PltStreamPump.h">
-				</File>
-				<File
 					RelativePath=".\Platinum\Source\Core\PltTaskManager.cpp">
 				</File>
 				<File
@@ -381,106 +369,402 @@ copy Release\libPlatinum.lib ..\..\xbmc\lib\libUPnP
 					RelativePath=".\Platinum\Source\Core\PltUPnP.h">
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Core\PltUPnPHelper.h">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Core\PltXmlHelper.h">
+					RelativePath=".\Platinum\Source\Core\PltUtilities.h">
 				</File>
 			</Filter>
 			<Filter
-				Name="MediaServer"
+				Name="Devices"
 				Filter="">
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\ConnectionManagerSCPD.cpp">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\ContentDirectorywSearchSCPD.cpp">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltDidl.cpp">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltDidl.h">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltFileMediaServer.cpp">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltFileMediaServer.h">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaBrowser.cpp">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaBrowser.h">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaBrowserListener.h">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaCache.cpp">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaCache.h">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaItem.cpp">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaItem.h">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaServer.cpp">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaServer.h">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltSyncMediaBrowser.cpp">
-				</File>
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaServer\PltSyncMediaBrowser.h">
-				</File>
+				<Filter
+					Name="MediaConnect"
+					Filter="">
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaConnect\PltMediaConnect.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaConnect\PltMediaConnect.h">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaConnect\X_MS_MediaReceiverRegistrarSCPD.cpp">
+					</File>
+				</Filter>
+				<Filter
+					Name="MediaRenderer"
+					Filter="">
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaRenderer\AVTransportSCPD.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaRenderer\PltMediaController.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaRenderer\PltMediaController.h">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaRenderer\PltMediaRenderer.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaRenderer\PltMediaRenderer.h">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaRenderer\RdrConnectionManagerSCPD.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaRenderer\RenderingControlSCPD.cpp">
+					</File>
+				</Filter>
+				<Filter
+					Name="MediaServer"
+					Filter="">
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\ConnectionManagerSCPD.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\ContentDirectorySCPD.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\ContentDirectorywSearchSCPD.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltDidl.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltDidl.h">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltFileMediaServer.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltFileMediaServer.h">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaBrowser.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaBrowser.h">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaCache.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaCache.h">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaItem.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaItem.h">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaPlaylist.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaPlaylist.h">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaServer.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltMediaServer.h">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltSyncMediaBrowser.cpp">
+					</File>
+					<File
+						RelativePath=".\Platinum\Source\Devices\MediaServer\PltSyncMediaBrowser.h">
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
-				Name="MediaRenderer"
+				Name="Extras"
 				Filter="">
 				<File
-					RelativePath=".\Platinum\Source\Devices\MediaRenderer\AVTransportSCPD.cpp">
+					RelativePath=".\Platinum\Source\Extras\PltDownloader.cpp">
+					<FileConfiguration
+						Name="Debug|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile_FastCap|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release_LTCG|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Devices\MediaRenderer\PltMediaController.cpp">
+					RelativePath=".\Platinum\Source\Extras\PltDownloader.h">
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Devices\MediaRenderer\PltMediaController.h">
+					RelativePath=".\Platinum\Source\Extras\PltFrameBuffer.cpp">
+					<FileConfiguration
+						Name="Debug|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile_FastCap|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release_LTCG|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Devices\MediaRenderer\PltMediaControllerListener.h">
+					RelativePath=".\Platinum\Source\Extras\PltFrameBuffer.h">
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Devices\MediaRenderer\PltMediaRenderer.cpp">
+					RelativePath=".\Platinum\Source\Extras\PltFrameServer.cpp">
+					<FileConfiguration
+						Name="Debug|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile_FastCap|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release_LTCG|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Devices\MediaRenderer\PltMediaRenderer.h">
+					RelativePath=".\Platinum\Source\Extras\PltFrameServer.h">
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Devices\MediaRenderer\RdrConnectionManagerSCPD.cpp">
+					RelativePath=".\Platinum\Source\Extras\PltFrameStream.cpp">
+					<FileConfiguration
+						Name="Debug|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile_FastCap|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release_LTCG|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Devices\MediaRenderer\RenderingControlSCPD.cpp">
-				</File>
-			</Filter>
-			<Filter
-				Name="MediaConnect"
-				Filter="">
-				<File
-					RelativePath=".\Platinum\Source\Devices\MediaConnect\PltMediaConnect.cpp">
+					RelativePath=".\Platinum\Source\Extras\PltFrameStream.h">
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Devices\MediaConnect\PltMediaConnect.h">
+					RelativePath=".\Platinum\Source\Extras\PltLeaks.cpp">
+					<FileConfiguration
+						Name="Debug|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile_FastCap|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release_LTCG|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\Platinum\Source\Devices\MediaConnect\X_MS_MediaReceiverRegistrarSCPD.cpp">
+					RelativePath=".\Platinum\Source\Extras\PltLeaks.h">
+				</File>
+				<File
+					RelativePath=".\Platinum\Source\Extras\PltMetadataHandler.cpp">
+					<FileConfiguration
+						Name="Debug|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile_FastCap|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release_LTCG|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Platinum\Source\Extras\PltMetadataHandler.h">
+				</File>
+				<File
+					RelativePath=".\Platinum\Source\Extras\PltRingBufferStream.cpp">
+					<FileConfiguration
+						Name="Debug|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile_FastCap|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release_LTCG|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Platinum\Source\Extras\PltRingBufferStream.h">
+				</File>
+				<File
+					RelativePath=".\Platinum\Source\Extras\PltStreamPump.cpp">
+					<FileConfiguration
+						Name="Debug|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Profile_FastCap|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release_LTCG|Xbox">
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Platinum\Source\Extras\PltStreamPump.h">
 				</File>
 			</Filter>
 			<Filter
@@ -490,30 +774,30 @@ copy Release\libPlatinum.lib ..\..\xbmc\lib\libUPnP
 					RelativePath=".\Platinum\Source\Platinum\Platinum.h">
 				</File>
 				<File
-					RelativePath=".\platinum\source\platinum\PltVersion.h">
+					RelativePath=".\Platinum\Source\Platinum\PltSvnVersion.h">
+				</File>
+				<File
+					RelativePath=".\Platinum\Source\Platinum\PltVersion.h">
 				</File>
 			</Filter>
 		</Filter>
 		<Filter
 			Name="Neptune"
 			Filter="">
-			<File
-				RelativePath=".\Neptune\Source\Core\Neptune.cpp">
-			</File>
-			<File
-				RelativePath=".\Neptune\Source\Neptune\Neptune.h">
-			</File>
-			<File
-				RelativePath=".\Neptune\Source\Core\NptConfig.h">
-			</File>
-			<File
-				RelativePath=".\Neptune\Source\Neptune\NptVersion.h">
-			</File>
 			<Filter
 				Name="Core"
 				Filter="">
 				<File
+					RelativePath=".\Neptune\Source\Core\Neptune.cpp">
+				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\Neptune.h">
+				</File>
+				<File
 					RelativePath=".\Neptune\Source\Core\NptArray.h">
+				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\NptAutoreleasePool.h">
 				</File>
 				<File
 					RelativePath=".\Neptune\Source\Core\NptBase64.cpp">
@@ -534,6 +818,9 @@ copy Release\libPlatinum.lib ..\..\xbmc\lib\libUPnP
 					RelativePath=".\Neptune\Source\Core\NptCommon.h">
 				</File>
 				<File
+					RelativePath=".\Neptune\Source\Core\NptConfig.h">
+				</File>
+				<File
 					RelativePath=".\Neptune\Source\Core\NptConsole.cpp">
 				</File>
 				<File
@@ -541,6 +828,12 @@ copy Release\libPlatinum.lib ..\..\xbmc\lib\libUPnP
 				</File>
 				<File
 					RelativePath=".\Neptune\Source\Core\NptConstants.h">
+				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\NptCrypto.cpp">
+				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\NptCrypto.h">
 				</File>
 				<File
 					RelativePath=".\Neptune\Source\Core\NptDataBuffer.cpp">
@@ -558,10 +851,31 @@ copy Release\libPlatinum.lib ..\..\xbmc\lib\libUPnP
 					RelativePath=".\Neptune\Source\Core\NptDefs.h">
 				</File>
 				<File
+					RelativePath=".\Neptune\Source\Core\NptDigest.cpp">
+				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\NptDigest.h">
+				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\NptDynamicCast.h">
+				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\NptDynamicLibraries.cpp">
+				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\NptDynamicLibraries.h">
+				</File>
+				<File
 					RelativePath=".\Neptune\Source\Core\NptFile.cpp">
 				</File>
 				<File
 					RelativePath=".\Neptune\Source\Core\NptFile.h">
+				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\NptHash.cpp">
+				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\NptHash.h">
 				</File>
 				<File
 					RelativePath=".\Neptune\Source\Core\NptHttp.cpp">
@@ -624,6 +938,9 @@ copy Release\libPlatinum.lib ..\..\xbmc\lib\libUPnP
 					RelativePath=".\Neptune\Source\Core\NptSelectableMessageQueue.h">
 				</File>
 				<File
+					RelativePath=".\Neptune\Source\Core\NptSerialPort.h">
+				</File>
+				<File
 					RelativePath=".\Neptune\Source\Core\NptSimpleMessageQueue.cpp">
 				</File>
 				<File
@@ -669,6 +986,18 @@ copy Release\libPlatinum.lib ..\..\xbmc\lib\libUPnP
 					RelativePath=".\Neptune\Source\Core\NptTime.h">
 				</File>
 				<File
+					RelativePath=".\Neptune\Source\Core\NptTls.cpp">
+				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\NptTls.h">
+				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\NptTlsDefaultTrustAnchorsBase.h">
+				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\NptTlsDefaultTrustAnchorsExtended.h">
+				</File>
+				<File
 					RelativePath=".\Neptune\Source\Core\NptTypes.h">
 				</File>
 				<File
@@ -692,64 +1021,92 @@ copy Release\libPlatinum.lib ..\..\xbmc\lib\libUPnP
 				<File
 					RelativePath=".\Neptune\Source\Core\NptXml.h">
 				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\NptZip.cpp">
+				</File>
+				<File
+					RelativePath=".\Neptune\Source\Core\NptZip.h">
+				</File>
 			</Filter>
 			<Filter
 				Name="System"
 				Filter="">
-				<File
-					RelativePath=".\Neptune\Source\System\Bsd\NptBsdSockets.cpp">
-				</File>
-				<File
-					RelativePath=".\Neptune\Source\System\Posix\NptPosixFile.cpp">
-				</File>
-				<File
-					RelativePath=".\Neptune\Source\System\Win32\NptWin32Debug.cpp">
-					<FileConfiguration
-						Name="Debug|Xbox">
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Profile|Xbox">
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Profile_FastCap|Xbox">
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Xbox">
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release_LTCG|Xbox">
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)/$(InputName)1.obj"/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\Neptune\Source\System\Win32\NptWin32File.cpp">
-				</File>
-				<File
-					RelativePath=".\Neptune\Source\System\Win32\NptWin32Queue.cpp">
-				</File>
-				<File
-					RelativePath=".\Neptune\Source\System\Win32\NptWin32System.cpp">
-				</File>
-				<File
-					RelativePath=".\Neptune\Source\System\Win32\NptWin32Threads.cpp">
-				</File>
-				<File
-					RelativePath=".\Neptune\Source\System\Win32\NptWin32Threads.h">
-				</File>
+				<Filter
+					Name="bsd"
+					Filter="">
+					<File
+						RelativePath=".\Neptune\Source\System\Bsd\NptBsdResolver.cpp">
+					</File>
+					<File
+						RelativePath=".\Neptune\Source\System\Bsd\NptBsdSockets.cpp">
+					</File>
+				</Filter>
+				<Filter
+					Name="posix"
+					Filter="">
+					<File
+						RelativePath=".\Neptune\Source\System\Posix\NptPosixFile.cpp">
+					</File>
+				</Filter>
+				<Filter
+					Name="win32"
+					Filter="">
+					<File
+						RelativePath=".\Neptune\Source\System\Win32\NptWin32Debug.cpp">
+						<FileConfiguration
+							Name="Debug|Xbox">
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Profile|Xbox">
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Profile_FastCap|Xbox">
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Xbox">
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release_LTCG|Xbox">
+							<Tool
+								Name="VCCLCompilerTool"
+								ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Neptune\Source\System\Win32\NptWin32File.cpp">
+					</File>
+					<File
+						RelativePath=".\Neptune\Source\System\Win32\NptWin32Queue.cpp">
+					</File>
+					<File
+						RelativePath=".\Neptune\Source\System\Win32\NptWin32System.cpp">
+					</File>
+					<File
+						RelativePath=".\Neptune\Source\System\Win32\NptWin32Threads.cpp">
+					</File>
+					<File
+						RelativePath=".\Neptune\Source\System\Win32\NptWin32Threads.h">
+					</File>
+					<File
+						RelativePath=".\Neptune\Source\System\Win32\NptWin32Time.cpp">
+					</File>
+				</Filter>
+				<Filter
+					Name="xbox"
+					Filter="">
+				</Filter>
 			</Filter>
 		</Filter>
 	</Files>

@@ -37,7 +37,7 @@ NPT_WinsockSystem::NPT_WinsockSystem() {
     xnsp.cfgIpFragMaxPacketDiv256 = 32; // == 8kb, default = 8 (2kb)
     xnsp.cfgSockMaxSockets = 64; // default = 64
 #endif
-	xnsp.cfgSockDefaultRecvBufsizeInK = 128; // default = 16
+    xnsp.cfgSockDefaultRecvBufsizeInK = 128; // default = 16
     xnsp.cfgSockDefaultSendBufsizeInK = 128; // default = 16
 
     INT err = XNetStartup(&xnsp);

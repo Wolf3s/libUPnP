@@ -11,7 +11,7 @@
 |       includes
 +---------------------------------------------------------------------*/
 #include <stdio.h>
-
+#import <Foundation/Foundation.h>
 #include "NptConfig.h"
 #include "NptConsole.h"
 
