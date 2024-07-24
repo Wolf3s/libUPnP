@@ -258,7 +258,7 @@ PLT_ProtocolInfo::ValidateExtra()
 
         NPT_List<FieldEntry>::Iterator entry = 
             entries.GetFirstItem();
-
+#ifndef XBMC
         // pn-param must always be first
         if (entry->m_Key != "DLNA.ORG_PN") 
             NPT_CHECK_SEVERE(NPT_ERROR_INVALID_SYNTAX);
@@ -267,11 +267,28 @@ PLT_ProtocolInfo::ValidateExtra()
             entry->m_Value, 
             PLT_DLNAPNCharsToValidate));
         m_DLNA_PN = entry->m_Value;
-        
+
+#endif        
         // parse other optional fields
         NPT_ProtocolInfoParserState state = PLT_PROTINFO_PARSER_STATE_PN;
+#ifdef XBMC
+        for (;entry;entry++) {
+            if (entry->m_Key == "DLNA.ORG_PN") {
+                if (state > PLT_PROTINFO_PARSER_STATE_PN) 
+                    NPT_CHECK_SEVERE(NPT_ERROR_INVALID_SYNTAX);
+
+                NPT_CHECK_SEVERE(ValidateField(
+                    entry->m_Value, 
+                    PLT_DLNAPNCharsToValidate));
+
+                m_DLNA_PN = entry->m_Value;
+                state = PLT_PROTINFO_PARSER_STATE_PN;
+                continue;
+            } else if (entry->m_Key == "DLNA.ORG_OP") {
+#else
         while (++entry) {
             if (entry->m_Key == "DLNA.ORG_OP") {
+#endif
                 // op-param only allowed after pn-param
                 if (state > PLT_PROTINFO_PARSER_STATE_PN) 
                     NPT_CHECK_SEVERE(NPT_ERROR_INVALID_SYNTAX);
@@ -452,7 +469,11 @@ PLT_MediaItemResource::PLT_MediaItemResource()
     m_Uri             = "";
     m_ProtocolInfo    = PLT_ProtocolInfo();
     m_Duration        = (NPT_UInt32)-1;
-    m_Size            = (NPT_Size)-1;
+#ifdef XBMC
+    m_Size            = (NPT_LargeSize)-1;
+#else
+    m_Size            = (NPT_Size)-1;	
+#endif
     m_Protection      = "";
     m_Bitrate         = (NPT_UInt32)-1;
     m_BitsPerSample   = (NPT_UInt32)-1;
@@ -703,6 +724,12 @@ PLT_MediaObject::Reset()
     m_MiscInfo.toc = "";
     m_MiscInfo.user_annotation = "";
 
+#ifdef XBMC
+    m_Recorded.program_title = "";
+    m_Recorded.series_title = "";
+    m_Recorded.episode_number = 0;
+#endif
+
     m_Resources.Clear();
 
     m_Didl = "";
@@ -800,6 +827,28 @@ PLT_MediaObject::ToDidl(NPT_UInt32 mask, NPT_String& didl)
         didl += NPT_String::FromInteger(m_MiscInfo.original_track_number);
         didl += "</upnp:originalTrackNumber>";
     }
+#ifdef XBMC
+    // program title
+    if (mask & PLT_FILTER_MASK_PROGRAMTITLE && !m_Recorded.program_title.IsEmpty()) {
+        didl += "<upnp:programTitle>";
+        PLT_Didl::AppendXmlEscape(didl, m_Recorded.program_title);
+        didl += "</upnp:programTitle>";
+    }
+
+    // series title
+    if (mask & PLT_FILTER_MASK_SERIESTITLE && !m_Recorded.series_title.IsEmpty()) {
+        didl += "<upnp:seriesTitle>";
+        PLT_Didl::AppendXmlEscape(didl, m_Recorded.series_title);
+        didl += "</upnp:seriesTitle>";
+    }
+
+    // episode number
+    if (mask & PLT_FILTER_MASK_EPISODE && m_Recorded.episode_number > 0) {
+        didl += "<upnp:episodeNumber>";
+        didl += NPT_String::FromInteger(m_Recorded.episode_number);
+        didl += "</upnp:episodeNumber>";
+    }
+#endif
 
 	if (mask & PLT_FILTER_MASK_TOC & !m_MiscInfo.toc.IsEmpty()) {
         didl += "<upnp:toc>";
@@ -819,8 +868,11 @@ PLT_MediaObject::ToDidl(NPT_UInt32 mask, NPT_String& didl)
                     PLT_Didl::FormatTimeStamp(didl, m_Resources[i].m_Duration);
                     didl += "\"";
                 }
-
+#ifdef XBMC
+                if (mask & PLT_FILTER_MASK_RES_SIZE && m_Resources[i].m_Size != (NPT_LargeSize)-1) {
+#else
                 if (mask & PLT_FILTER_MASK_RES_SIZE && m_Resources[i].m_Size != (NPT_Size)-1) {
+#endif
                     didl += " size=\"";
                     didl += NPT_String::FromIntegerU(m_Resources[i].m_Size);
                     didl += "\"";
@@ -899,7 +951,9 @@ PLT_MediaObject::FromDidl(NPT_XmlElementNode* entry)
 
     res = PLT_XmlHelper::GetAttribute(entry, "parentID", m_ParentID);
     NPT_CHECK_LABEL_SEVERE(res, cleanup);
-
+#ifdef XBMC
+    res = PLT_XmlHelper::GetAttribute(entry, "refID", m_ReferenceID);
+#endif
     res = PLT_XmlHelper::GetChildText(entry, "title", m_Title, didl_namespace_dc);
     NPT_CHECK_LABEL_SEVERE(res, cleanup);
 
@@ -914,7 +968,14 @@ PLT_MediaObject::FromDidl(NPT_XmlElementNode* entry)
     m_People.artists.FromDidl(children);
 
     PLT_XmlHelper::GetChildText(entry, "album", m_Affiliation.album, didl_namespace_upnp);
-
+#ifdef XBMC
+    PLT_XmlHelper::GetChildText(entry, "programTitle", m_Recorded.program_title, didl_namespace_upnp);
+    PLT_XmlHelper::GetChildText(entry, "seriesTitle", m_Recorded.series_title, didl_namespace_upnp);
+    PLT_XmlHelper::GetChildText(entry, "episodeNumber", str, didl_namespace_upnp);
+    NPT_UInt32 value;
+    if (NPT_FAILED(str.ToInteger(value))) value = 0;
+    m_Recorded.episode_number = value;
+#endif
     children.Clear();
     PLT_XmlHelper::GetChildren(entry, children, "genre", didl_namespace_upnp);
     for (NPT_Cardinal i=0; i<children.GetItemCount(); i++) {
@@ -927,7 +988,9 @@ PLT_MediaObject::FromDidl(NPT_XmlElementNode* entry)
     PLT_XmlHelper::GetChildText(entry, "longDescription", m_Description.long_description, didl_namespace_upnp);
     PLT_XmlHelper::GetChildText(entry, "originalTrackNumber", str, didl_namespace_upnp);
 	PLT_XmlHelper::GetChildText(entry, "toc", m_MiscInfo.toc, didl_namespace_upnp);
+#ifndef XBMC
     NPT_UInt32 value;
+#endif
     if (NPT_FAILED(str.ToInteger(value))) value = 0;
     m_MiscInfo.original_track_number = value;
 
@@ -937,8 +1000,13 @@ PLT_MediaObject::FromDidl(NPT_XmlElementNode* entry)
         for (NPT_Cardinal i=0; i<children.GetItemCount(); i++) {
             PLT_MediaItemResource resource;
             if (children[i]->GetText() == NULL) {
+#ifdef XBMC
                 res = NPT_FAILURE;
                 NPT_CHECK_LABEL_SEVERE(res, cleanup);
+#else
+                NPT_LOG_WARNING("No resource text");
+                continue;
+#endif
             }
 
             resource.m_Uri = *children[i]->GetText();
@@ -948,8 +1016,13 @@ PLT_MediaObject::FromDidl(NPT_XmlElementNode* entry)
             // and it would take too long to resolve at this point
             NPT_HttpUrl url(resource.m_Uri, true);
             if (!url.IsValid()) {
+#ifdef XBMC
+                NPT_LOG_WARNING_1("Invalid resource uri: %s", (const char*)resource.m_Uri);
+                continue;
+#else
                 res = NPT_FAILURE;
-                NPT_CHECK_LABEL_SEVERE(res, cleanup);
+                NPT_CHECK_LABEL_SEVERE(res, cleanup);	
+#endif
             }
             NPT_String protocol_info;
             res = PLT_XmlHelper::GetAttribute(children[i], "protocolInfo", protocol_info);
@@ -957,8 +1030,13 @@ PLT_MediaObject::FromDidl(NPT_XmlElementNode* entry)
 
             resource.m_ProtocolInfo = PLT_ProtocolInfo(protocol_info);
             if (!resource.m_ProtocolInfo.IsValid()) {
+#ifdef XBMC
+                NPT_LOG_WARNING_1("Invalid resource protocol info: %s", (const char*)protocol_info);
+                continue;
+#else
                 res = NPT_FAILURE;
-                NPT_CHECK_LABEL_SEVERE(res, cleanup);
+                NPT_CHECK_LABEL_SEVERE(res, cleanup);	
+#endif
             }
             
             PLT_XmlHelper::GetAttribute(children[i], "protection", resource.m_Protection);
@@ -1042,6 +1120,12 @@ PLT_MediaItem::ToDidl(NPT_UInt32 mask, NPT_String& didl)
     PLT_Didl::AppendXmlEscape(tmp, m_ObjectID);
     tmp += "\" parentID=\"";
     PLT_Didl::AppendXmlEscape(tmp, m_ParentID);
+#ifdef XBMC
+    if(!m_ReferenceID.IsEmpty()) {
+      tmp += "\" refID=\"";
+      PLT_Didl::AppendXmlEscape(tmp, m_ReferenceID);
+    }
+#endif
     tmp += "\" restricted=\"";
     tmp += m_Restricted?"1\"":"0\"";
 
@@ -1113,6 +1197,12 @@ PLT_MediaContainer::ToDidl(NPT_UInt32 mask, NPT_String& didl)
 
     PLT_Didl::AppendXmlEscape(tmp, m_ObjectID);
     tmp += "\" parentID=\"";
+#ifdef XBMC
+    if(!m_ReferenceID.IsEmpty()) {
+      tmp += "\" refID=\"";
+      PLT_Didl::AppendXmlEscape(tmp, m_ReferenceID);
+    }
+#endif
     PLT_Didl::AppendXmlEscape(tmp, m_ParentID);
     tmp += "\" restricted=\"";
     tmp += m_Restricted?"1\"":"0\"";
