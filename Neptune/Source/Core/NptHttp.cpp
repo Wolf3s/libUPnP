@@ -2880,12 +2880,19 @@ NPT_HttpFileRequestHandler_DefaultFileTypeMap[] = {
     {"aif",  "audio/x-aiff"},
     {"aifc", "audio/x-aiff"},
     {"aiff", "audio/x-aiff"},
+#ifdef XBMC_FRODO
+    {"flac", "audio/x-flac"},
+    {"mka",  "audio/x-matroska"},
+#endif
     {"mpa",  "audio/mpeg"},
     {"mp2",  "audio/mpeg"},
     {"mp3",  "audio/mpeg"},
     {"m4a",  "audio/mp4"},
     {"wma",  "audio/x-ms-wma"},
     {"wav",  "audio/x-wav"},
+#ifdef XBMC_FRODO
+    {"mkv",  "video/x-matroska"},
+#endif
     {"mpeg", "video/mpeg"},
     {"mpg",  "video/mpeg"},
     {"mp4",  "video/mp4"},
@@ -2898,6 +2905,9 @@ NPT_HttpFileRequestHandler_DefaultFileTypeMap[] = {
     {"wtv",  "video/x-ms-wmv"},
     {"asf",  "video/x-ms-asf"},
     {"mkv",  "video/x-matroska"},
+#ifdef XBMC_FRODO
+    {"mk3d", "video/x-matroska-3d"},
+#endif
     {"flv",  "video/x-flv"},
     {"avi",  "video/x-msvideo"},
     {"divx", "video/x-msvideo"},
