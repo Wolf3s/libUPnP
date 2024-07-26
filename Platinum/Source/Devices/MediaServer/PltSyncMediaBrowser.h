@@ -118,7 +118,7 @@ protected:
                           NPT_Int32                index, 
                           NPT_Int32                count,
                           bool                     browse_metadata = false,
-#ifdef XBMC
+#ifdef _XBMC
                           const char*              filter = "*", // explicitely specify res otherwise WMP won't return a URL!
 #else
                           const char*              filter = "dc:date,upnp:genre,res,res@duration,res@size,upnp:albumArtURI,upnp:album,upnp:artist,upnp:author,searchable,childCount", // explicitely specify res otherwise WMP won't return a URL!

@@ -506,7 +506,7 @@ NPT_Win32Thread::EntryPoint(void* argument)
     NPT_System::GetCurrentTimeStamp(now);
     NPT_System::SetRandomSeed((NPT_UInt32)(now.ToNanos()) + ::GetCurrentThreadId());
 
-#ifdef XBMC
+#ifdef _XBMC
     // set a default name
     #pragma pack(push,8)
     struct THREADNAME_INFO

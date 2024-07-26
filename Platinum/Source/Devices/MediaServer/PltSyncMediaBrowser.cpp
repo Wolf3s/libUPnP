@@ -36,7 +36,7 @@
 |   includes
 +---------------------------------------------------------------------*/
 #include "PltSyncMediaBrowser.h"
-#ifdef XBMC
+#ifdef _XBMC
 #include <algorithm>
 #endif
 
@@ -242,7 +242,7 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
 {
     NPT_Result res = NPT_FAILURE;
     NPT_Int32  index = start;
-#ifdef XBMC
+#ifdef _XBMC
 	NPT_UInt32 count = 0;
 #endif
     
@@ -276,14 +276,14 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
         }
 
         // server returned no more, bail now
-#ifdef XBMC
+#ifdef _XBMC
         if (browse_data->info.nr == 0)
 #else
         if (browse_data->info.items->GetItemCount() == 0)
 #endif
             break;
 
-#ifdef XBMC
+#ifdef _XBMC
         if (browse_data->info.nr != browse_data->info.items->GetItemCount()) {
             NPT_LOG_WARNING_2("Server unexpected number of items (%d vs %d)", browse_data->info.items->GetItemCount(), browse_data->info.nr);
         }
@@ -307,7 +307,7 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
         // Unless we were told to stop after reaching a certain amount to avoid
         // length delays
         // (some servers may return a total matches out of whack at some point too)
-#ifdef XBMC
+#ifdef _XBMC
         if ((browse_data->info.tm && browse_data->info.tm <= count) ||
             (max_results && count >= max_results))
 #else

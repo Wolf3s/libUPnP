@@ -279,7 +279,7 @@ PLT_HttpServerSocketTask::Write(NPT_HttpResponse* response,
     // get the request entity to set additional headers
     NPT_InputStreamReference body_stream;
     NPT_HttpEntity* entity = response->GetEntity();
-#ifdef XBMC
+#ifdef _XBMC
 	if (entity) {
 #else
     if (entity && NPT_SUCCEEDED(entity->GetInputStream(body_stream))) {
@@ -345,7 +345,7 @@ PLT_HttpServerSocketTask::Write(NPT_HttpResponse* response,
     NPT_CHECK_WARNING(output_stream->WriteFully(header_stream.GetData(), header_stream.GetDataSize()));
 
     // send response body if any
-#ifdef XBMC
+#ifdef _XBMC
     if (!headers_only && NPT_SUCCEEDED(entity->GetInputStream(body_stream)) && !body_stream.IsNull()) {
 #else
     if (!headers_only && !body_stream.IsNull()) {
